@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<!-- Select a Product Configuration -->
+		<InstallShieldProductConfiguration>Express</InstallShieldProductConfiguration>
+		<!-- Select a Visual Studio Configuration / InstallShield Release -->
+		<Configuration>Debug</Configuration>
+		<InstallShieldRelease>$(Configuration)</InstallShieldRelease>
+	</PropertyGroup>
+	<ItemGroup>
+		<!-- The InstallShieldProject item selects the project to build -->
+		<InstallShieldProject Include="$(MSBuildProjectDirectory)\$(MSBuildProjectName).isl"/>
+		<!-- The InstallShieldReleaseFlags sets Release Flags -->
+		<!--<InstallShieldReleaseFlags Include=""/>-->
+		<!-- The InstallShieldMergeModulePath specifies what directories are
+		searched for Merge Modules -->
+		<!--<InstallShieldMergeModulePath Include=""/>-->
+	</ItemGroup>
+	<ItemGroup>
+		<!-- The ProjectReference items refer to any Visual Studio solutions you want to automatically probe for Project Output Groups.  -->
+	</ItemGroup>
+	<ItemGroup>
+		<!-- The TaggedOutputs items allow you to explicitly add extra files to output groups. Each item must include both Name and OutputGroup, as well as TargetPath metadata values. -->
+		<!--<TaggedOutputs Include="C:\My Test Exe.exe">
+			<Name>My Test Project</Name>
+			<OutputGroup>Primary output</OutputGroup>
+			<TargetPath>My Test Exe.exe</TargetPath>
+		</TaggedOutputs> -->
+	</ItemGroup>
+	<Import Project="$(MSBuildExtensionsPath32)\InstallShield\2015Limited\InstallShield.targets"/>
+	<ItemGroup>
+		<ProjectReference Include="..\WS8610GUI\WS8610GUI.csproj">
+			<Name>WS8610GUI</Name>
+			<Project>{92C2BC8B-F194-4C8F-A59E-ABE65C79B6A1}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\WS8610Recorder\WS8610Recorder.csproj">
+			<Name>WS8610Recorder</Name>
+			<Project>{2C430CA9-E078-4405-A5D1-2DC0540EB1B3}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\WS8610Service\WS8610Service.csproj">
+			<Name>WS8610Service</Name>
+			<Project>{893C0411-5FDA-4348-B93F-2F497830DDA2}</Project>
+		</ProjectReference>
+	</ItemGroup>
+</Project>

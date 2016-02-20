@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{92C2BC8B-F194-4C8F-A59E-ABE65C79B6A1}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WS8610GUI</RootNamespace>
+    <AssemblyName>WS8610GUI</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>WS8610.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ZedGraph">
+      <HintPath>ext\ZedGraph.dll</HintPath>
+    </Reference>
+    <Reference Include="ZedGraph.resources">
+      <HintPath>ext\ZedGraph.resources.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AggStatistiche.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AggStatistiche.Designer.cs">
+      <DependentUpon>AggStatistiche.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CambiaTemp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CambiaTemp.Designer.cs">
+      <DependentUpon>CambiaTemp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EliminaMisure.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EliminaMisure.Designer.cs">
+      <DependentUpon>EliminaMisure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuStripEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MenuStripEx.Designer.cs">
+      <DependentUpon>MenuStripEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Nulli.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Nulli.Designer.cs">
+      <DependentUpon>Nulli.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Progress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Progress.Designer.cs">
+      <DependentUpon>Progress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LogService.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogService.Designer.cs">
+      <DependentUpon>LogService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Database.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Database.Designer.cs">
+      <DependentUpon>Database.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceStartStop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ServiceStartStop.Designer.cs">
+      <DependentUpon>ServiceStartStop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Grafico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Grafico.Designer.cs">
+      <DependentUpon>Grafico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HexByte.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HexByte.Designer.cs">
+      <DependentUpon>HexByte.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImpostazioniDb.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImpostazioniDb.Designer.cs">
+      <DependentUpon>ImpostazioniDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Log.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Log.Designer.cs">
+      <DependentUpon>Log.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ShowMemory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowMemory.Designer.cs">
+      <DependentUpon>ShowMemory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tabella.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tabella.Designer.cs">
+      <DependentUpon>Tabella.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TrayNotify.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrayNotify.Designer.cs">
+      <DependentUpon>TrayNotify.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WriteMemory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WriteMemory.Designer.cs">
+      <DependentUpon>WriteMemory.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AggStatistiche.resx">
+      <DependentUpon>AggStatistiche.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CambiaTemp.resx">
+      <DependentUpon>CambiaTemp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EliminaMisure.resx">
+      <DependentUpon>EliminaMisure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Nulli.resx">
+      <DependentUpon>Nulli.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Progress.resx">
+      <DependentUpon>Progress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogService.resx">
+      <DependentUpon>LogService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Database.resx">
+      <DependentUpon>Database.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ServiceStartStop.resx">
+      <DependentUpon>ServiceStartStop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grafico.resx">
+      <DependentUpon>Grafico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HexByte.resx">
+      <DependentUpon>HexByte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImpostazioniDb.resx">
+      <DependentUpon>ImpostazioniDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Log.resx">
+      <DependentUpon>Log.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="ShowMemory.resx">
+      <DependentUpon>ShowMemory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tabella.resx">
+      <DependentUpon>Tabella.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrayNotify.resx">
+      <DependentUpon>TrayNotify.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WriteMemory.resx">
+      <DependentUpon>WriteMemory.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WS8610Recorder\WS8610Recorder.csproj">
+      <Project>{2C430CA9-E078-4405-A5D1-2DC0540EB1B3}</Project>
+      <Name>WS8610Recorder</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WS8610\WS8610.csproj">
+      <Project>{17D0449D-84E5-4F50-8462-C02EF0C3B436}</Project>
+      <Name>WS8610</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\running.png" />
+    <None Include="Resources\stop.png" />
+    <None Include="Resources\disabled.png" />
+    <None Include="Resources\comments.png" />
+    <None Include="Resources\arrow_refresh.png" />
+    <None Include="Resources\application_view_columns.png" />
+    <None Include="Resources\drive_disk.png" />
+    <None Include="Resources\information.png" />
+    <None Include="Resources\database_gear.png" />
+    <None Include="Resources\database_refresh.png" />
+    <None Include="Resources\chart_curve.png" />
+    <None Include="Resources\chart_curve_add.png" />
+    <None Include="Resources\database_go.png" />
+    <None Include="Resources\cross.png" />
+    <None Include="Resources\WS8610ico.png" />
+    <None Include="Resources\table_error.png" />
+    <None Include="Resources\database_delete.png" />
+    <None Include="Resources\table_edit.png" />
+    <Content Include="WS8610.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
