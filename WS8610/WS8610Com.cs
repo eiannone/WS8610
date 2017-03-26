@@ -14,7 +14,7 @@ namespace WS8610
 		public const short HISTORY_BASE_ADDR = 0x0064;                           // Starting address where history data is stored
 		public const short HISTORY_BUFFER_SIZE = 0x7FFF - HISTORY_BASE_ADDR + 1; // Size of history buffer, in bytes (32.668)
 		public const int LOG_LEVEL = 1;
-		private const int MICRODELAY = 4;                                         // microseconds wait for microdelay method (decrease for more speed)
+		private const int MICRODELAY = 4;                                        // microseconds wait for microdelay method (decrease for more speed)
 		private const int OPENING_TIMEOUT_SECS = 10;
 		private const int MAX_READ_RETRIES = 10;
 		private readonly Stopwatch _delayer = new Stopwatch();
@@ -557,14 +557,13 @@ namespace WS8610
             switch (sensorNr) {
                 case 0:
                 case 2:
-                    b[0] = (byte)((((temp * 10)) % 10) + (((byte)Math.Floor(temp) % 10) << 4));
-                    b[1] = (byte)((b[1] & 0xF0) + Math.Floor(temp / 10) + 3);
+                    b[0] = (byte) ((((temp*10))%10) + (((byte) Math.Floor(temp)%10) << 4));
+                    b[1] = (byte) ((b[1] & 0xF0) + Math.Floor(temp/10) + 3);
                     break;
-
                 case 1:
                 case 3:
-                    b[0] = (byte)(((byte)(((temp * 10)) % 10) << 4) + (b[0] & 0x0F));
-                    b[1] = (byte)(((byte)Math.Floor(temp) % 10) + ((byte)(Math.Floor(temp / 10) + 3) << 4));
+                    b[0] = (byte) (((byte) (((temp*10))%10) << 4) + (b[0] & 0x0F));
+                    b[1] = (byte) (((byte) Math.Floor(temp)%10) + ((byte) (Math.Floor(temp/10) + 3) << 4));
                     break;
             }
             return WriteMemory(startingAddr, b);
@@ -605,10 +604,10 @@ namespace WS8610
 		/// <param name="index">History record index</param>
 		/// <returns>History record</returns>
 		private HistoryRecord decode_history_record(IList<byte> b, int index = 0) {
-			var min = (b[0] >> 4) * 10 + (b[0] & 0x0F);
+			var min  = (b[0] >> 4) * 10 + (b[0] & 0x0F);
 			var hour = (b[1] >> 4) * 10 + (b[1] & 0x0F);
 			var mday = (b[2] >> 4) * 10 + (b[2] & 0x0F);
-			var mon = (b[3] >> 4) * 10 + (b[3] & 0x0F);
+			var mon  = (b[3] >> 4) * 10 + (b[3] & 0x0F);
 			var year = (b[4] >> 4) * 10 + (b[4] & 0x0F) + 2000;
 			var hr = new HistoryRecord(index);
 			try {

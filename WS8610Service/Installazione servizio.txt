@@ -1,0 +1,2 @@
+Lanciare da riga di comando:
+"%programfiles(x86)%\WS8610\WS8610Service.exe" -install

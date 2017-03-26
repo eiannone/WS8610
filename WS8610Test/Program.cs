@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.ServiceProcess;
-using System.Text;
-using System.Threading;
 using WS8610;
 using WS8610Recorder;
 
