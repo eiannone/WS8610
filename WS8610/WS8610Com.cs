@@ -569,6 +569,42 @@ namespace WS8610
             return WriteMemory(startingAddr, b);
 	    }
 
+        /// <summary>
+        /// Delete one recorded data for one sensor
+        /// </summary>
+        /// <param name="recordNr">Index of record in memory (0 based)</param>
+        /// <param name="sensorNr">Sensor number (0 = base station)</param>
+        /// <returns></returns>
+	    public bool DeleteRecord(int recordNr, int sensorNr) {
+            if (sensorNr > ExtSensors) throw new Exception("Requested sensor not available");
+            var offset = (sensorNr < 2)? 5 : 10;
+            var startingAddr = (short)(HISTORY_BASE_ADDR + (recordNr * HistoryRecSize) + offset);
+            var b = DumpMemory(startingAddr, 5);
+            switch (sensorNr) {
+                case 0:
+                    b[0] = 0xAA;
+                    b[1] = (byte)((b[1] & 0xF0) | 0x0A);
+                    b[3] = 0xAA;
+                    break;
+                case 1:
+                    b[1] = (byte)((b[1] & 0x0F) | 0xA0);
+                    b[2] = 0xAA;
+                    b[4] = 0xAA;
+                    break;
+                case 2:
+                    b[0] = 0xAA;
+                    b[1] = 0xAA;
+                    b[2] = (byte)((b[2] & 0xF0) | 0x0A);
+                    break;
+                case 3:
+                    b[2] = (byte)((b[2] & 0x0F) | 0xA0);
+                    b[3] = 0xAA;
+                    b[4] = 0xAA;
+                    break;
+            }
+            return WriteMemory(startingAddr, b);
+        }
+
 		#region private methods
 
 		private void report_progress(string action, int percent) {
