@@ -110,7 +110,7 @@ namespace WS8610Recorder
                 var numSens = mList[0].Sensor.Length;
                 var tPrec = new decimal?[numSens];
                 for (var s = 0; s < tPrec.Length; s++) {
-                    tPrec[s] = (lastMem.Temp.Length > s && lastMem.Temp[s] != HistoryRecord.NO_TEMP) ? (decimal?)lastMem.Temp[s] : null;
+                    tPrec[s] = lastMem.HasTemp(s) ? (decimal?)lastMem.Temp[s] : null;
                 }
 				foreach (var m in mList) {
                     // Verifica variazioni troppo brusche di temperatura su un sensore
@@ -199,8 +199,8 @@ namespace WS8610Recorder
 				}
 				var m = new Measure(hr.DateTime);
 				for (var s = 0; s < hr.Temp.Length; s++) {
-					if (hr.Temp[s] != HistoryRecord.NO_TEMP && hr.Temp[s] < MAX_TEMP_LIMIT) m.Sensor[s].Temp = (decimal?)hr.Temp[s];
-					if (hr.Hum[s] != HistoryRecord.NO_HUM) m.Sensor[s].Humid = hr.Hum[s];
+					if (hr.HasTemp(s) && hr.Temp[s] < MAX_TEMP_LIMIT) m.Sensor[s].Temp = (decimal?)hr.Temp[s];
+					if (hr.HasHum(s)) m.Sensor[s].Humid = hr.Hum[s];
 				}
 
 				// Corregge record con orario non ai 5 minuti

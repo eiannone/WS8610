@@ -14,12 +14,20 @@ namespace WS8610
 		public bool IsLast;
 		public bool IsValid;
 
+	    public bool HasTemp(int i) {
+	        return (Temp.Length > i && Temp[i] != NO_TEMP);
+	    }
+
+	    public bool HasHum(int i) {
+	        return (Hum.Length > i && Hum[i] != NO_HUM);
+	    }
+
 		public string TempStr(int i) {
-			return (Temp.Length <= i || Temp[i] == NO_TEMP) ? "--" : Temp[i].ToString("0.0");
+			return HasTemp(i)? Temp[i].ToString("0.0") : "--";
 		}
 
 		public string HumStr(int i) {
-			return (Hum.Length <= i || Hum[i] == NO_HUM) ? "--" : Hum[i].ToString();
+			return HasHum(i)? Hum[i].ToString() : "--";
 		}
 
 		public string DateTimeStr => DateTime.ToString("dd/MM/yyyy HH:mm");
