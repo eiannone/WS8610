@@ -36,11 +36,9 @@ namespace WS8610GUI
 			_lb = lb;
 		}
 
-		public override Encoding Encoding {
-			get { return Encoding.Default; }
-		}
+		public override Encoding Encoding => Encoding.Default;
 
-		public override void Write(string value) {
+	    public override void Write(string value) {
 			_lb.Text += value;
 		}
 
