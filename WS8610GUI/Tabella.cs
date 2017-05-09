@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using WS8610;
@@ -27,10 +28,32 @@ namespace WS8610GUI
         private void dgDati_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             var col = dgDati.Columns[e.ColumnIndex].HeaderText;
-            if (col.StartsWith("T.") && col.Length == 3) {
-                var sensorNr = Convert.ToInt32(col.Substring(2));
-                var recordNr = Convert.ToInt32(dgDati.Rows[e.RowIndex].Cells[0].Value.ToString().Substring(1));
+            if (col.Length != 3 || (!col.StartsWith("T.") && !col.StartsWith("U."))) return;
 
+            var sensorNr = Convert.ToInt32(col.Substring(2));
+            var cells = dgDati.Rows[e.RowIndex].Cells;
+            var recordNr = Convert.ToInt32(cells[0].Value.ToString().Substring(1));
+            var valStr = (string)cells[e.ColumnIndex].Value;
+            var val = (valStr == "--") ? 0 : Convert.ToDouble(valStr);
+            var tipo = col.StartsWith("T") ? CambiaVal.TipoVal.Temperatura : CambiaVal.TipoVal.Umidita;
+
+            var win = new CambiaVal(recordNr, sensorNr, val, tipo);
+            var res = win.ShowDialog();
+            if (res != DialogResult.OK) return;
+
+            var wasOpen = _wsCom.IsOpen;
+            if (!wasOpen) _wsCom.Open();
+            if (tipo == CambiaVal.TipoVal.Temperatura) {
+                _wsCom.SetTemp(win.NRecord, win.NSensore, win.Val);
+            }
+            else {
+                _wsCom.SetHumidity(win.NRecord, win.NSensore, Convert.ToInt32(win.Val));
+            }
+            if (!wasOpen) _wsCom.Close();
+            if (recordNr == win.NRecord) {
+                var colIndex = 2 + (win.NSensore*2);
+                if (tipo == CambiaVal.TipoVal.Umidita) colIndex++;
+                cells[colIndex].Value = win.Val.ToString(CultureInfo.CurrentCulture);
             }
         }
     }

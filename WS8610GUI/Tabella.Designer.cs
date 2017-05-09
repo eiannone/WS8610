@@ -103,7 +103,7 @@
             this.dgDati.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgDati.Size = new System.Drawing.Size(483, 473);
             this.dgDati.TabIndex = 0;
-            this.dgDati.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgDati_CellClick);
+            this.dgDati.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgDati_CellClick);
             // 
             // Pos
             // 

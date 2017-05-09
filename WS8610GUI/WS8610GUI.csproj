@@ -62,11 +62,11 @@
     <Compile Include="AggStatistiche.Designer.cs">
       <DependentUpon>AggStatistiche.cs</DependentUpon>
     </Compile>
-    <Compile Include="CambiaTemp.cs">
+    <Compile Include="CambiaVal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CambiaTemp.Designer.cs">
-      <DependentUpon>CambiaTemp.cs</DependentUpon>
+    <Compile Include="CambiaVal.Designer.cs">
+      <DependentUpon>CambiaVal.cs</DependentUpon>
     </Compile>
     <Compile Include="EliminaMisure.cs">
       <SubType>Form</SubType>
@@ -174,8 +174,8 @@
     <EmbeddedResource Include="AggStatistiche.resx">
       <DependentUpon>AggStatistiche.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CambiaTemp.resx">
-      <DependentUpon>CambiaTemp.cs</DependentUpon>
+    <EmbeddedResource Include="CambiaVal.resx">
+      <DependentUpon>CambiaVal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EliminaMisure.resx">
       <DependentUpon>EliminaMisure.cs</DependentUpon>
