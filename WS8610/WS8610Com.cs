@@ -570,6 +570,34 @@ namespace WS8610
 	    }
 
         /// <summary>
+        /// Set humidity value fo a history record in memory.
+        /// </summary>
+        /// <param name="recordNr">Index of record in memory (0 based)</param>
+        /// <param name="sensorNr">Sensor number (0 = base station)</param>
+        /// <param name="humidity">Humidity value</param>
+        /// 
+        public bool SetHumidity(int recordNr, int sensorNr, int humidity)
+        {
+            if (sensorNr > ExtSensors) throw new Exception("Requested sensor not available");
+            var offsets = new[] { 8, 9, 11, 14 };
+            var startingAddr = (short)(HISTORY_BASE_ADDR + (recordNr * HistoryRecSize) + offsets[sensorNr]);
+            var b = DumpMemory(startingAddr, 2);
+            switch (sensorNr)
+            {
+                case 0:
+                case 1:
+                case 3:
+                    b[0] = (byte)humidity;
+                    break;
+                case 2:
+                    b[0] = (byte)(((byte)(humidity % 10) << 4) | (b[0] & 0x0F));
+                    b[1] = (byte)((humidity / 10) + (b[1] & 0xF0));
+                    break;
+            }
+            return WriteMemory(startingAddr, b);
+        }
+
+        /// <summary>
         /// Delete one recorded data for one sensor
         /// </summary>
         /// <param name="recordNr">Index of record in memory (0 based)</param>
@@ -816,17 +844,16 @@ namespace WS8610
 			}
 			set_RTS(false);
 			Microdelay();
-			var status = true;
-			if (checkvalue) {
-				status = get_CTS();
-				//TODO: checking value of status, error routine
-				Microdelay();
-				set_DTR(false);
-				Microdelay();
-				set_DTR(true);
-				Microdelay();
-			}
-			return status;
+		    if (!checkvalue) return true;
+
+		    var status = get_CTS();
+		    //TODO: checking value of status, error routine
+		    Microdelay();
+		    set_DTR(false);
+		    Microdelay();
+		    set_DTR(true);
+		    Microdelay();
+		    return status;
 		}
 
 		private byte read_byte() {
