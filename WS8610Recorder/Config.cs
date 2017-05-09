@@ -10,10 +10,11 @@ namespace WS8610Recorder
 {
 	public class Config
 	{
-		// Oppure: Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase) + @"\config.db3"
-		static readonly string config_db_path = get_config_db_path();
-		static readonly FileSystemWatcher ConfWatcher = get_config_watcher();
-		static readonly SQLiteConnection Conn = new SQLiteConnection("Data Source=" + config_db_path);		
+        public static string ConfigDbPath { get; } = get_config_db_path();
+
+        // Oppure: Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase) + @"\config.db3"
+        static readonly FileSystemWatcher ConfWatcher = get_config_watcher();
+		static readonly SQLiteConnection Conn = new SQLiteConnection("Data Source=" + ConfigDbPath);		
 		static Dictionary<string, object> _dic = load_configuration();
 
 		public static string DbFolder {
@@ -76,8 +77,6 @@ namespace WS8610Recorder
 			}
 		}
 
-		public static string ConfigDbPath => config_db_path;
-
 	    public static HistoryRecord LastMem {
 			get {
 				return new HistoryRecord(Convert.ToInt32(_dic["LastMemId"])) { DateTime = (DateTime)_dic["LastMemDt"] };
@@ -90,9 +89,9 @@ namespace WS8610Recorder
 
 		static string get_config_db_path() {
 			var c = File.ReadAllLines(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\WS8610Recorder.conf");
-			var db_path = c[0].Split('=')[1].Trim();
-			if (!File.Exists(db_path)) throw new Exception("Impossibile trovare il database config '" + db_path + "'");
-			return db_path;
+			var dbPath = c[0].Split('=')[1].Trim();
+			if (!File.Exists(dbPath)) throw new Exception("Impossibile trovare il database config '" + dbPath + "'");
+			return dbPath;
 		}
 
 		static Dictionary<string, object> load_configuration() {
@@ -155,8 +154,8 @@ namespace WS8610Recorder
 		}
 
 		private static FileSystemWatcher get_config_watcher() {
-			var configDir = Path.GetDirectoryName(config_db_path);
-			var configDb = Path.GetFileName(config_db_path);
+			var configDir = Path.GetDirectoryName(ConfigDbPath);
+			var configDb = Path.GetFileName(ConfigDbPath);
 			if (configDir == null || configDb == null) throw new Exception("Percordo del db di configurazione non valido.");
 			var configWatcher = new FileSystemWatcher {
 				Path = configDir,
