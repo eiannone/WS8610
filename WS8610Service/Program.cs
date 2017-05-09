@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.ServiceProcess;
 
 namespace WS8610Service
@@ -12,25 +11,22 @@ namespace WS8610Service
 		private static void Main(string[] args) {
 			if (args.Length > 0 && args[0] == "-install") {
 				// Chiamata da commandline per l'installazione del servizio
-				var service_path = Process.GetCurrentProcess().MainModule.FileName;
-				var p_args = "create \"" + WS8610Service.SERVICE_NAME + "\" binPath= \"" + service_path + "\" start= auto";
-				var pStartInfo = new ProcessStartInfo("sc", p_args);
+				var path = Process.GetCurrentProcess().MainModule.FileName;
+				var pArgs = "create \"" + WS8610Service.SERVICE_NAME + "\" binPath= \"" + path + "\" start= auto";
+				var pStartInfo = new ProcessStartInfo("sc", pArgs);
 				new Process { StartInfo = pStartInfo }.Start();
 				pStartInfo.Arguments = "start \"" + WS8610Service.SERVICE_NAME + "\"";
 				new Process { StartInfo = pStartInfo }.Start();
 			}
 			else if (args.Length > 0 && args[0] == "-uninstall") {
 				// Chiamata da commandline per la disinstallazione del servizio
-				var service_path = Process.GetCurrentProcess().MainModule.FileName;
-				var p_args = "stop \"" + WS8610Service.SERVICE_NAME + "\"";
-				var pStartInfo = new ProcessStartInfo("sc", p_args);
+				var pStartInfo = new ProcessStartInfo("sc", "stop \"" + WS8610Service.SERVICE_NAME + "\"");
 				new Process { StartInfo = pStartInfo }.Start();
 				pStartInfo.Arguments = "delete \"" + WS8610Service.SERVICE_NAME + "\"";
 				new Process { StartInfo = pStartInfo }.Start();
 			}
 			else {
-				var ServicesToRun = new ServiceBase[] { new WS8610Service() };
-				ServiceBase.Run(ServicesToRun);
+				ServiceBase.Run(new ServiceBase[] { new WS8610Service() });
 			}
 		}
 	}
