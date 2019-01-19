@@ -22,7 +22,7 @@ namespace WS8610Test4
                 //var n = wscom.ExtSensors;
                 //Console.WriteLine("N. sensori: " + n);
                 //wscom.SetTemp(2080, 1, 13.1);
-                for(var nRec = 2057; nRec < 2062; nRec++) wscom.DeleteRecord(nRec, 3);
+                //for(var nRec = 2057; nRec < 2062; nRec++) wscom.DeleteRecord(nRec, 3);
                 //var rec = wscom.GetHistoryRecords(1686);
                 //Console.WriteLine("Record estratti: " + rec.Count + ". Da #" + rec[0].Index + " a #" + rec.Last().Index);
             }

@@ -571,6 +571,11 @@ namespace WS8610
 
         /// <summary>
         /// Set humidity value fo a history record in memory.
+        /// Each set is 10 bytes for one sensor, 13 bytes for two sensors or 15 bytes for three sernsors
+        /// bytes 1-2: Time, bytes 3-5: Date, 
+        /// bytes 6-8: Temp0 + Temp1, byte 9: RH0, byte 10 RH1
+        /// bytes 11-13: Temp2, RH2
+        /// bytes 13-15: Temp3, RH3
         /// </summary>
         /// <param name="recordNr">Index of record in memory (0 based)</param>
         /// <param name="sensorNr">Sensor number (0 = base station)</param>
@@ -587,7 +592,7 @@ namespace WS8610
                 case 0:
                 case 1:
                 case 3:
-                    b[0] = (byte)humidity;
+                    b[0] = (byte)(((humidity / 10) << 4) + (humidity % 10));
                     break;
                 case 2:
                     b[0] = (byte)(((byte)(humidity % 10) << 4) | (b[0] & 0x0F));
