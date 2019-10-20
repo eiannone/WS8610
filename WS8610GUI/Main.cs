@@ -104,21 +104,34 @@ namespace WS8610GUI
 		}
 
 		private void check_notifies(object sender, DoWorkEventArgs e) {
-			// Per 3 minuti controlla ogni 30 secondi se ci sono notifiche
-			for (var m = 0; m < 6; m++) {
-				var notifies = Recorder.GetNotifies();
-				if (notifies.Length > 0) {
-					Invoke((MethodInvoker)delegate {
-						var win = new TrayNotify(notifies);
-						win.Show();
-					});
-					return;
-				}
-				for (var w = 0; w < 5; w++) {
-					Thread.Sleep(6000);
-					if (_notifyChecker.CancellationPending) return;
-				}
-			}
+            try {
+                // Per 3 minuti controlla ogni 30 secondi se ci sono notifiche
+                for (var m = 0; m < 6; m++)
+                {
+                    var notifies = Recorder.GetNotifies();
+                    if (notifies.Length > 0)
+                    {
+                        Invoke((MethodInvoker)delegate {
+                            var win = new TrayNotify(notifies);
+                            win.Show();
+                        });
+                        return;
+                    }
+                    for (var w = 0; w < 5; w++)
+                    {
+                        Thread.Sleep(6000);
+                        if (_notifyChecker.CancellationPending) return;
+                    }
+                }
+            }
+            catch(Exception ex) {
+                var notifies = new Notify[1];
+                notifies[0] = new Notify { DateTime = DateTime.Now, Message = ex.Message };
+                Invoke((MethodInvoker)delegate {
+                    var win = new TrayNotify(notifies, true);
+                    win.Show();
+                });
+            }
 		}
 
 		private static void tsEsci_Click(object sender, EventArgs e) {

@@ -8,28 +8,30 @@ namespace WS8610Test4
 	{
 
 		static void Main(string[] args) {
-            var wscom = new WS8610Com(Config.ComPort);
-            try
-            {
-                wscom.Open();
-                //var bytes = wscom.DumpMemory(0, 6);
-                //foreach (var b in bytes) Console.WriteLine("{0:X}", b);
+            //var wscom = new WS8610Com(Config.ComPort);
+            //try
+            //{
+            //    wscom.Open();
+            //    //var bytes = wscom.DumpMemory(0, 6);
+            //    //foreach (var b in bytes) Console.WriteLine("{0:X}", b);
 
-                //var rec = wscom.GetLastHistoryRecord();
-                //var rec = wscom.GetHistoryRecord(0);
-                //Console.WriteLine(rec.DateTimeStr);
+            //    //var rec = wscom.GetLastHistoryRecord();
+            //    //var rec = wscom.GetHistoryRecord(0);
+            //    //Console.WriteLine(rec.DateTimeStr);
 
-                //var n = wscom.ExtSensors;
-                //Console.WriteLine("N. sensori: " + n);
-                //wscom.SetTemp(2080, 1, 13.1);
-                //for(var nRec = 2057; nRec < 2062; nRec++) wscom.DeleteRecord(nRec, 3);
-                //var rec = wscom.GetHistoryRecords(1686);
-                //Console.WriteLine("Record estratti: " + rec.Count + ". Da #" + rec[0].Index + " a #" + rec.Last().Index);
-            }
-            finally
-            {
-                if (wscom.IsOpen) wscom.Close();
-            }
+            //    //var n = wscom.ExtSensors;
+            //    //Console.WriteLine("N. sensori: " + n);
+            //    //wscom.SetTemp(2080, 1, 13.1);
+            //    //for(var nRec = 2057; nRec < 2062; nRec++) wscom.DeleteRecord(nRec, 3);
+            //    //var rec = wscom.GetHistoryRecords(1686);
+            //    //Console.WriteLine("Record estratti: " + rec.Count + ". Da #" + rec[0].Index + " a #" + rec.Last().Index);
+            //}
+            //finally
+            //{
+            //    if (wscom.IsOpen) wscom.Close();
+            //}
+            var rec = new Recorder();
+            rec.UpdateStats(DateTime.Parse("2019-01-19"));
         }
 
 		private static void Log(string p, LogLevel logLevel) {

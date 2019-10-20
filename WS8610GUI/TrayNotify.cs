@@ -7,8 +7,11 @@ namespace WS8610GUI
 {
 	public partial class TrayNotify : Form
 	{
-		public TrayNotify(IEnumerable<Notify> notifies) {
+        private bool _isError;
+
+		public TrayNotify(IEnumerable<Notify> notifies, bool isError = false) {
 			InitializeComponent();
+            _isError = isError;
 			var bottom = 0;
 			foreach(var n in notifies) {
 				var orario = ((n.DateTime.Date == DateTime.Now.Date) ? "" : n.DateTime.ToString("dd/MM ")) + n.DateTime.ToString("HH:mm");
@@ -32,12 +35,12 @@ namespace WS8610GUI
 
 		private void btChiudi_Click(object sender, EventArgs e) {
 			Close();
-			Recorder.ClearNotifies();			
+			if (!_isError) Recorder.ClearNotifies();			
 		}
 
 		private void lkLog_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
 			Close();
-			Recorder.ClearNotifies();
+            if (!_isError) Recorder.ClearNotifies();
 			var w = new LogService();
 			w.Show();
 		}
