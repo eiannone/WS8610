@@ -123,10 +123,16 @@ namespace WS8610Recorder
                     }
 
                     // Verifica orari sballati (tipicamente quando si scarica la batteria in un sensore)
-                    // Controlla che la differenza tra esterno nord e sud sia inferiore a 10 gradi
-                    if (m.Sensor[1].Temp != null && m.Sensor[3].Temp != null && Math.Abs((decimal)m.Sensor[1].Temp - (decimal)m.Sensor[3].Temp) > 9) {
-                        var dati = "Record del " + m.DateTimeStr + ". Valori: " + m.Sensor[1].Temp + " e " + m.Sensor[3].Temp;
-                        throw new Exception("Differenza elevata di temperatura tra sensori 1 e 3. " + dati);
+                    // Controlla che la differenza tra esterno nord (1) e sud (3) e tra interno camera (2) 
+                    // e cameretta (0) non sia superiore a 7 gradi
+                    int[][] coppieSensori = {new int[]{ 1, 3 }, new int[]{ 0, 2}};
+                    foreach (var s in coppieSensori) {
+                        var t1 = m.Sensor[s[0]].Temp;
+                        var t2 = m.Sensor[s[1]].Temp;
+                        if (t1 != null && t2 != null && Math.Abs((double)t1 - (double)t2) > 7.0) {
+                            throw new Exception("Differenza elevata di temperatura tra sensori " + s[0] + " e " + s[1] + ". " +
+                                "Record del " + m.DateTimeStr + ". Valori: " + t1 + " e " + t2);
+                        }
                     }
                     
 					// Verifica salti di orario
