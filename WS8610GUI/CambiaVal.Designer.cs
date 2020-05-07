@@ -40,15 +40,6 @@
             label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // lbVal
-            // 
-            this.lbVal.AutoSize = true;
-            this.lbVal.Location = new System.Drawing.Point(12, 67);
-            this.lbVal.Name = "lbVal";
-            this.lbVal.Size = new System.Drawing.Size(87, 13);
-            this.lbVal.TabIndex = 0;
-            this.lbVal.Text = "Val. temperatura:";
-            // 
             // label2
             // 
             label2.AutoSize = true;
@@ -67,9 +58,19 @@
             label3.TabIndex = 5;
             label3.Text = "Sensore n.:";
             // 
+            // lbVal
+            // 
+            this.lbVal.AutoSize = true;
+            this.lbVal.Location = new System.Drawing.Point(12, 67);
+            this.lbVal.Name = "lbVal";
+            this.lbVal.Size = new System.Drawing.Size(87, 13);
+            this.lbVal.TabIndex = 0;
+            this.lbVal.Text = "Val. temperatura:";
+            // 
             // tbVal
             // 
             this.tbVal.Location = new System.Drawing.Point(105, 64);
+            this.tbVal.MaxLength = 4;
             this.tbVal.Name = "tbVal";
             this.tbVal.Size = new System.Drawing.Size(46, 20);
             this.tbVal.TabIndex = 1;
@@ -116,6 +117,7 @@
             // 
             // CambiaVal
             // 
+            this.AcceptButton = this.btSalva;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btAnnulla;

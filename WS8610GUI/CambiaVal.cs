@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Forms;
-using WS8610;
 
 namespace WS8610GUI
 {
@@ -11,9 +10,9 @@ namespace WS8610GUI
 
         public int NRecord { get; private set; }
         public int NSensore { get; private set; }
-        public double Val { get; private set; }
+        public double? Val { get; private set; }
 
-        public CambiaVal(int nRecord, int nSensore, double val, TipoVal tipo)
+        public CambiaVal(int nRecord, int nSensore, double? val, TipoVal tipo)
         {
             InitializeComponent();
             if (tipo == TipoVal.Temperatura) {
@@ -27,15 +26,16 @@ namespace WS8610GUI
 
             tbRecord.Text = nRecord.ToString();
             cbSensore.SelectedIndex = nSensore;
-            tbVal.Text = val.ToString(CultureInfo.CurrentCulture);
+            tbVal.Text = (val == null)? "" : ((double)val).ToString(CultureInfo.CurrentCulture);
         }
 
         private void btSalva_Click(object sender, EventArgs e)
         {
-            try {
+            try {                
                 NRecord = Convert.ToInt32(tbRecord.Text);
                 NSensore = cbSensore.SelectedIndex;
-                Val = Convert.ToDouble(tbVal.Text);
+                if (tbVal.Text.Trim() == "") Val = null;
+                else Val = Convert.ToDouble(tbVal.Text);
                 DialogResult = DialogResult.OK;
                 Close();
             }
