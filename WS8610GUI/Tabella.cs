@@ -36,7 +36,8 @@ namespace WS8610GUI
             var cells = dgDati.Rows[e.RowIndex].Cells;
             var recordNr = Convert.ToInt32(cells[0].Value.ToString().Substring(1));
             var valStr = (string)cells[e.ColumnIndex].Value;
-            double? val = (valStr == "--")? null : (double?)Convert.ToDouble(valStr);
+            double? val = (valStr == HistoryRecord.NO_VALUE || valStr == HistoryRecord.ERR_VALUE) ? 
+                null : (double?)Convert.ToDouble(valStr);
 
             var win = new CambiaVal(recordNr, sensorNr, val, tipo);
             var res = win.ShowDialog();
@@ -55,7 +56,8 @@ namespace WS8610GUI
             if (recordNr == win.NRecord) {
                 var colIndex = 2 + (win.NSensore*2);
                 if (tipo == CambiaVal.TipoVal.Umidita) colIndex++;
-                cells[colIndex].Value = (win.Val == null)? "--" : ((double)win.Val).ToString(CultureInfo.CurrentCulture);
+                cells[colIndex].Value = (win.Val == null)? 
+                    HistoryRecord.NO_VALUE : ((double)win.Val).ToString(CultureInfo.CurrentCulture);
             }
         }
     }
